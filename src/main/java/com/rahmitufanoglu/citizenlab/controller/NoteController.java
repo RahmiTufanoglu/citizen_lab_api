@@ -25,27 +25,27 @@ public class NoteController {
 
   @GetMapping("/note/all")
   public List<Note> getAll(@PathVariable Long projectId) {
-    return noteService.findAllNotes(projectId);
+    return noteService.getAll(projectId);
   }
 
   @GetMapping("/note/{noteId}")
   public Note getById(@PathVariable Long noteId) {
-    return noteService.findProjectById(noteId);
+    return noteService.get(noteId);
   }
 
   @ResponseStatus(HttpStatus.CREATED)
   @PostMapping("/note")
   public void create(@PathVariable Long projectId, @Valid @RequestBody Note note) {
-    noteService.createNote(projectId, note);
+    noteService.create(projectId, note);
   }
 
   @PutMapping("/note/{noteId}")
   public void update(@PathVariable Long noteId, @Valid @RequestBody Note updatedNote) {
-    noteService.updateNote(noteId, updatedNote);
+    noteService.update(noteId, updatedNote);
   }
 
   @DeleteMapping("/note/{noteId}")
   public void delete(@PathVariable Long noteId) {
-    noteService.deleteNote(noteId);
+    noteService.delete(noteId);
   }
 }

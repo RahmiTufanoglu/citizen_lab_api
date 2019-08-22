@@ -19,7 +19,7 @@ public class ProjectService {
   @Autowired
   private UserRepository userRepository;
 
-  public List<Project> getAllProjects(Long userId) {
+  public List<Project> getAll(Long userId) {
     Optional<User> optionalUser = userRepository.findById(userId);
     if (optionalUser.isPresent()) {
       return optionalUser.get().getProjectList();
@@ -28,7 +28,7 @@ public class ProjectService {
     }
   }
 
-  public Project getProject(Long projectId) {
+  public Project get(Long projectId) {
     Optional<Project> optionalProject = projectRepository.findById(projectId);
     if (optionalProject.isPresent()) {
       return optionalProject.get();
@@ -37,7 +37,7 @@ public class ProjectService {
     }
   }
 
-  public void createProject(Long userId, Project project) {
+  public void create(Long userId, Project project) {
     Optional<User> optionalUser = userRepository.findById(userId);
     if (optionalUser.isPresent()) {
       project.setUser(optionalUser.get());
@@ -47,7 +47,7 @@ public class ProjectService {
     }
   }
 
-  public void updateProject(Long projectId, Project updatedProject) {
+  public void update(Long projectId, Project updatedProject) {
     Optional<Project> optionalProject = projectRepository.findById(projectId);
     if (optionalProject.isPresent()) {
       optionalProject.get().setTitle(updatedProject.getTitle());
@@ -58,7 +58,7 @@ public class ProjectService {
     }
   }
 
-  public void deleteProject(Long projectId) {
+  public void delete(Long projectId) {
     Optional<Project> optionalProject = projectRepository.findById(projectId);
     if (optionalProject.isPresent()) {
       projectRepository.deleteById(projectId);

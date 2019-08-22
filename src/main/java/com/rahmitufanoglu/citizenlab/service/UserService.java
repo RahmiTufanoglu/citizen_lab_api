@@ -14,11 +14,11 @@ public class UserService {
   @Autowired
   private UserRepository userRepository;
 
-  public List<User> getAllUser() {
+  public List<User> getAll() {
     return userRepository.findAll();
   }
 
-  public User getUser(Long userId) {
+  public User get(Long userId) {
     Optional<User> optionalUser = userRepository.findById(userId);
     if (optionalUser.isPresent()) {
       return optionalUser.get();
@@ -27,11 +27,11 @@ public class UserService {
     }
   }
 
-  public void createUser(User user) {
+  public void create(User user) {
     userRepository.save(user);
   }
 
-  public void updateUser(Long userId, User newUser) {
+  public void update(Long userId, User newUser) {
     Optional<User> optionalUser = userRepository.findById(userId);
     if (optionalUser.isPresent()) {
       optionalUser.get().setFirstName(newUser.getFirstName());
@@ -41,7 +41,7 @@ public class UserService {
     }
   }
 
-  public void deleteUser(Long userId) {
+  public void delete(Long userId) {
     Optional<User> optionalUser = userRepository.findById(userId);
     if (optionalUser.isPresent()) {
       userRepository.delete(optionalUser.get());

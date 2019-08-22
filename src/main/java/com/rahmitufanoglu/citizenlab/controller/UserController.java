@@ -25,27 +25,27 @@ public class UserController {
 
   @GetMapping("/all")
   public List<User> getAll() {
-    return userService.getAllUser();
+    return userService.getAll();
   }
 
   @GetMapping("/{userId}")
   public User getById(@PathVariable Long userId) {
-    return userService.getUser(userId);
+    return userService.get(userId);
   }
 
   @ResponseStatus(HttpStatus.CREATED)
   @PostMapping
   public void create(@Valid @RequestBody User user) {
-    userService.createUser(user);
+    userService.create(user);
   }
 
   @PutMapping("/{userId}")
   public void update(@PathVariable Long userId, @Valid @RequestBody User updatedUser) {
-    userService.updateUser(userId, updatedUser);
+    userService.update(userId, updatedUser);
   }
 
   @DeleteMapping("/{userId}")
   public void delete(@PathVariable Long userId) {
-    userService.deleteUser(userId);
+    userService.delete(userId);
   }
 }

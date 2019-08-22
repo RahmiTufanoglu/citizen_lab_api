@@ -28,7 +28,7 @@ public class NoteService {
   @Autowired
   private UserRepository userRepository;
 
-  public List<Note> findAllNotes(Long projectId) {
+  public List<Note> getAll(Long projectId) {
     Optional<Project> optionalProject = projectRepository.findById(projectId);
     if (optionalProject.isPresent()) {
       return optionalProject.get().getNoteList();
@@ -37,7 +37,7 @@ public class NoteService {
     }
   }
 
-  public Note findProjectById(Long noteId) {
+  public Note get(Long noteId) {
     Optional<Note> optionalNote = noteRepository.findById(noteId);
     if (optionalNote.isPresent()) {
       return optionalNote.get();
@@ -46,7 +46,7 @@ public class NoteService {
     }
   }
 
-  public void createNote(Long projectId, Note note) {
+  public void create(Long projectId, Note note) {
     Optional<Project> optionalProject = projectRepository.findById(projectId);
     if (optionalProject.isPresent()) {
       note.setProject(optionalProject.get());
@@ -56,7 +56,7 @@ public class NoteService {
     }
   }
 
-  public void updateNote(Long noteId, Note updatedNote) {
+  public void update(Long noteId, Note updatedNote) {
     Optional<Note> optionalNote = noteRepository.findById(noteId);
     if (optionalNote.isPresent()) {
       optionalNote.get().setTitle(updatedNote.getTitle());
@@ -67,7 +67,7 @@ public class NoteService {
     }
   }
 
-  public void deleteNote(Long noteId) {
+  public void delete(Long noteId) {
     Optional<Note> optionalNote = noteRepository.findById(noteId);
     if (optionalNote.isPresent()) {
       projectRepository.deleteById(noteId);

@@ -25,27 +25,27 @@ public class ProjectController {
 
   @GetMapping("/project/all")
   public List<Project> getAll(@PathVariable Long userId) {
-    return projectService.getAllProjects(userId);
+    return projectService.getAll(userId);
   }
 
   @GetMapping("/project/{projectId}")
   public Project getById(@PathVariable Long projectId) {
-    return projectService.getProject(projectId);
+    return projectService.get(projectId);
   }
 
   @ResponseStatus(HttpStatus.CREATED)
   @PostMapping("/project")
   public void create(@PathVariable Long userId, @Valid @RequestBody Project project) {
-    projectService.createProject(userId, project);
+    projectService.create(userId, project);
   }
 
   @PutMapping("/project/{projectId}")
   public void update(@PathVariable Long projectId, @Valid @RequestBody Project updatedProject) {
-    projectService.updateProject(projectId, updatedProject);
+    projectService.update(projectId, updatedProject);
   }
 
   @DeleteMapping("/project/{projectId}")
   public void delete(@PathVariable Long projectId) {
-    projectService.deleteProject(projectId);
+    projectService.delete(projectId);
   }
 }
