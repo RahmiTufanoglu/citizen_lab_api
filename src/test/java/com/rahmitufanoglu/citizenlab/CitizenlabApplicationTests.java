@@ -22,8 +22,8 @@ public class CitizenlabApplicationTests {
   @Test
   public void createUser() {
     List<Project> projectList = new ArrayList<>();
-    userRepository.save(new User(1L, "Rahmi", "Tufanoglu", "rahmi@gmail.com", "", "", LocalDateTime.now(), LocalDateTime.now(), projectList));
-    userRepository.save(new User(2L, "Umut", "Tufanoglu", "umut@gmail.com", "", "", LocalDateTime.now(), LocalDateTime.now(), projectList));
-    userRepository.save(new User(3L, "Dilan", "Tufanoglu", "dilan@gmail.com", "", "", LocalDateTime.now(), LocalDateTime.now(), projectList));
+    userRepository.save(new User(4L, "Rahmi", "Tufanoglu", "rahmi@gmail.com", "", "", LocalDateTime.now(), LocalDateTime.now(), projectList));
+    userRepository.save(new User(5L, "Umut", "Tufanoglu", "umut@gmail.com", "", "", LocalDateTime.now(), LocalDateTime.now(), projectList));
+    userRepository.save(new User(6L, "Dilan", "Tufanoglu", "dilan@gmail.com", "", "", LocalDateTime.now(), LocalDateTime.now(), projectList));
   }
 }
