@@ -1,6 +1,7 @@
 package com.rahmitufanoglu.citizenlab.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.LocalDateTime;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -32,20 +33,25 @@ public class Project {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "project_id", updatable = false, nullable = false)
-  private Long projectId;
+  @JsonProperty("project_id")
+  private Long project_id;
 
   @Column(name = "title", length = 150)
   @Size(min = 1, max = 150)
+  @JsonProperty("title")
   private String title;
 
   @Column(name = "description", length = 1000)
   @Size(min = 1, max = 1000)
+  @JsonProperty("description")
   private String description;
 
   @Column(name = "created_at")
+  @JsonProperty("created_at")
   private LocalDateTime createdAt;
 
   @Column(name = "updated_at")
+  @JsonProperty("updated_at")
   private LocalDateTime updatedAt;
 
   @PrePersist
@@ -58,10 +64,11 @@ public class Project {
     updatedAt = LocalDateTime.now();
   }
 
-  @ManyToOne(fetch = FetchType.LAZY)
+  @ManyToOne(fetch = FetchType.LAZY, targetEntity = User.class)
   @JoinColumn(name = "user_id", nullable = false)
   private User user;
 
   @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-  private List<Note> noteList;
+  @JsonProperty("project")
+  private List<Note> notes;
 }

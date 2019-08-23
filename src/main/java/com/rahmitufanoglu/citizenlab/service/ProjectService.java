@@ -22,7 +22,7 @@ public class ProjectService {
   public List<Project> getAll(Long userId) {
     Optional<User> optionalUser = userRepository.findById(userId);
     if (optionalUser.isPresent()) {
-      return optionalUser.get().getProjectList();
+      return optionalUser.get().getProjects();
     } else {
       throw new ResourceNotFoundException();
     }

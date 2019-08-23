@@ -36,6 +36,10 @@ public class UserService {
     if (optionalUser.isPresent()) {
       optionalUser.get().setFirstName(newUser.getFirstName());
       optionalUser.get().setLastName(newUser.getLastName());
+      optionalUser.get().setEmail(newUser.getEmail());
+      optionalUser.get().setPassword(newUser.getPassword());
+      optionalUser.get().setConfirmPassword(newUser.getConfirmPassword());
+      optionalUser.get().setUpdatedAt(newUser.getUpdatedAt());
     } else {
       throw new ResourceNotFoundException();
     }

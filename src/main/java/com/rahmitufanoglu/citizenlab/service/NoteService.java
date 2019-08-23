@@ -5,16 +5,10 @@ import com.rahmitufanoglu.citizenlab.model.Note;
 import com.rahmitufanoglu.citizenlab.model.Project;
 import com.rahmitufanoglu.citizenlab.repo.NoteRepository;
 import com.rahmitufanoglu.citizenlab.repo.ProjectRepository;
-import com.rahmitufanoglu.citizenlab.repo.UserRepository;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class NoteService {
@@ -25,13 +19,10 @@ public class NoteService {
   @Autowired
   private ProjectRepository projectRepository;
 
-  @Autowired
-  private UserRepository userRepository;
-
   public List<Note> getAll(Long projectId) {
     Optional<Project> optionalProject = projectRepository.findById(projectId);
     if (optionalProject.isPresent()) {
-      return optionalProject.get().getNoteList();
+      return optionalProject.get().getNotes();
     } else {
       throw new ResourceNotFoundException();
     }
@@ -75,10 +66,4 @@ public class NoteService {
       throw new ResourceNotFoundException();
     }
   }
-
-  /*public void saveImage(MultipartFile imageFile, String folder) throws IOException {
-    byte[] bytes = imageFile.getBytes();
-    Path path = Paths.get(folder + imageFile.getOriginalFilename());
-    Files.write(path, bytes);
-  }*/
 }
