@@ -36,8 +36,7 @@ public class FileModel {
   @Lob
   private byte[] data;
 
-  @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = Note.class)
-  //@JoinColumn(unique = true)
+  @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
   @JoinColumn(name = "note_id")
   @JsonProperty("note")
   private Note note;

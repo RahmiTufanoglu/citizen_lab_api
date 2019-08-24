@@ -1,10 +1,12 @@
 package com.rahmitufanoglu.citizenlab.controller;
 
 import com.rahmitufanoglu.citizenlab.model.User;
+import com.rahmitufanoglu.citizenlab.repo.UserPagingRepository;
 import com.rahmitufanoglu.citizenlab.service.UserService;
 import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,9 +23,18 @@ public class UserController {
   @Autowired
   private UserService userService;
 
+  @Autowired
+  private UserPagingRepository userPagingRepository;
+
   @GetMapping("/all")
   public List<User> getAll() {
     return userService.getAll();
+  }
+
+  // TODO: paging
+  @GetMapping("/all/paging/{page}")
+  public List<User> getPagingUser(@PathVariable int page) {
+    return userPagingRepository.findAll(PageRequest.of(page, 10)).getContent();
   }
 
   @GetMapping("/{userId}")

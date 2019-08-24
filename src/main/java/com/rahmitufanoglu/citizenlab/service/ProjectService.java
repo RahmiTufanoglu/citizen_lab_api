@@ -48,14 +48,23 @@ public class ProjectService {
   }
 
   public void update(Long projectId, Project updatedProject) {
-    Optional<Project> optionalProject = projectRepository.findById(projectId);
+    projectRepository.findById(projectId)
+        .map(project -> {
+          project.setTitle(updatedProject.getTitle());
+          project.setDescription(updatedProject.getDescription());
+          project.setUpdatedAt(updatedProject.getUpdatedAt());
+          return projectRepository.save(project);
+        }).orElseThrow(ResourceNotFoundException::new);
+
+    /*Optional<Project> optionalProject = projectRepository.findById(projectId);
     if (optionalProject.isPresent()) {
       optionalProject.get().setTitle(updatedProject.getTitle());
       optionalProject.get().setDescription(updatedProject.getDescription());
+      optionalProject.get().setUpdatedAt(updatedProject.getUpdatedAt());
       projectRepository.save(optionalProject.get());
     } else {
       throw new ResourceNotFoundException();
-    }
+    }*/
   }
 
   public void delete(Long projectId) {

@@ -1,5 +1,6 @@
 package com.rahmitufanoglu.citizenlab.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -11,13 +12,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.PrePersist;
-import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 @Entity
 @Table(name = "users")
@@ -32,40 +33,44 @@ public class User {
   @JsonProperty("user_id")
   private Long userId;
 
-  @Column(name = "first_name", length = 150)
+  @Column(name = "first_name", length = 150, nullable = false)
   @Size(min = 1, max = 150)
   @JsonProperty("first_name")
   private String firstName;
 
-  @Column(name = "last_name", length = 150)
+  @Column(name = "last_name", length = 150, nullable = false)
   @Size(min = 1, max = 150)
   @JsonProperty("last_name")
   private String lastName;
 
-  @Column(name = "email", length = 150)
+  @Column(name = "email", length = 150, nullable = false)
   @Size(min = 5, max = 150)
   @JsonProperty("email")
   private String email;
 
-  @Column(name = "password", length = 256)
-  @Size(min = 8, max = 256)
+  @Column(name = "password", length = 256, nullable = false)
+  @Size(min = 8, max = 256, message = "The password must be at least 8 characters long")
   @JsonProperty("password")
   private String password;
 
-  @Column(name = "confirm_password", length = 256)
+  @Column(name = "confirm_password", length = 256, nullable = false)
   @Size(min = 8, max = 256)
   @JsonProperty("confirm_password")
   private String confirmPassword;
 
-  @Column(name = "created_at")
+  @Column(name = "created_at", nullable = false)
+  @CreatedDate
   @JsonProperty("created_at")
+  @JsonFormat(pattern = "dd.MM.yyyy HH:mm:ss")
   private LocalDateTime createdAt;
 
-  @Column(name = "updated_at")
+  @Column(name = "updated_at", nullable = false)
+  @LastModifiedDate
   @JsonProperty("updated_at")
+  @JsonFormat(pattern = "dd.MM.yyyy HH:mm:ss")
   private LocalDateTime updatedAt;
 
-  @PrePersist
+  /*@PrePersist
   void onCreate() {
     createdAt = LocalDateTime.now();
   }
@@ -73,7 +78,7 @@ public class User {
   @PreUpdate
   void onUpdate() {
     updatedAt = LocalDateTime.now();
-  }
+  }*/
 
   @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
   @JsonProperty("projects")
