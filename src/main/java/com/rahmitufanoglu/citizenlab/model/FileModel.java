@@ -41,13 +41,17 @@ public class FileModel {
   @JsonProperty("note")
   private Note note;
 
-  /*@OneToOne(mappedBy = "files", fetch = FetchType.LAZY)
-  @JoinColumn(name = "note_id")
-  private Note note;*/
-
   public FileModel(String name, String type, byte[] data) {
     this.name = name;
     this.type = type;
     this.data = data;
+  }
+
+  // constructor without file_id
+  public FileModel(String name, String type, byte[] data, Note note) {
+    this.name = name;
+    this.type = type;
+    this.data = data;
+    this.note = note;
   }
 }

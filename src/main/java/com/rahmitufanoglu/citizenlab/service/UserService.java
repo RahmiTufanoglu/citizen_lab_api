@@ -3,7 +3,6 @@ package com.rahmitufanoglu.citizenlab.service;
 import com.rahmitufanoglu.citizenlab.exception.ResourceNotFoundException;
 import com.rahmitufanoglu.citizenlab.model.User;
 import com.rahmitufanoglu.citizenlab.repo.UserRepository;
-import com.rahmitufanoglu.citizenlab.util.UserComparator;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -20,10 +19,11 @@ public class UserService {
   @Autowired
   private BCryptPasswordEncoder passwordEncoder;
 
+
   public List<User> getAll() {
-    List<User> users = userRepository.findAll();
-    users.sort(new UserComparator());
-    return users;
+    //List<User> users = userRepository.findAll();
+    //users.sort(new UserComparator());
+    return userRepository.findAll();
   }
 
   public User get(Long userId) {

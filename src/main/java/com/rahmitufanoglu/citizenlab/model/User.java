@@ -70,17 +70,27 @@ public class User {
   @JsonFormat(pattern = "dd.MM.yyyy HH:mm:ss")
   private LocalDateTime updatedAt;
 
-  /*@PrePersist
-  void onCreate() {
-    createdAt = LocalDateTime.now();
-  }
-
-  @PreUpdate
-  void onUpdate() {
-    updatedAt = LocalDateTime.now();
-  }*/
-
   @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
   @JsonProperty("projects")
   private List<Project> projects;
+
+  // constructor without user_id
+  public User(
+      @Size(min = 1, max = 150) String firstName,
+      @Size(min = 1, max = 150) String lastName,
+      @Size(min = 5, max = 150) String email,
+      @Size(min = 8, max = 256, message = "The password must be at least 8 characters long") String password,
+      @Size(min = 8, max = 256) String confirmPassword,
+      LocalDateTime createdAt,
+      LocalDateTime updatedAt,
+      List<Project> projects) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.email = email;
+    this.password = password;
+    this.confirmPassword = confirmPassword;
+    this.createdAt = createdAt;
+    this.updatedAt = updatedAt;
+    this.projects = projects;
+  }
 }

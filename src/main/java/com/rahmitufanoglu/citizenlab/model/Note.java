@@ -58,16 +58,6 @@ public class Note {
   @JsonFormat(pattern = "dd.MM.yyyy HH:mm:ss")
   private LocalDateTime updatedAt;
 
-  /*@PrePersist
-  void onCreate() {
-    createdAt = LocalDateTime.now();
-  }
-
-  @PreUpdate
-  void onUpdate() {
-    updatedAt = LocalDateTime.now();
-  }*/
-
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "project_id", nullable = false)
   @JsonProperty("project")
@@ -76,4 +66,20 @@ public class Note {
   @OneToOne(mappedBy = "note", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
   @JsonProperty("file")
   private FileModel file;
+
+  // constructor without note_id
+  public Note(
+      @Size(min = 1, max = 150) String title,
+      @Size(min = 1, max = 1000) String description,
+      LocalDateTime createdAt,
+      LocalDateTime updatedAt,
+      Project project,
+      FileModel file) {
+    this.title = title;
+    this.description = description;
+    this.createdAt = createdAt;
+    this.updatedAt = updatedAt;
+    this.project = project;
+    this.file = file;
+  }
 }
