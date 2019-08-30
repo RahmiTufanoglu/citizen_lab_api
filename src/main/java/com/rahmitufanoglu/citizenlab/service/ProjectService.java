@@ -55,16 +55,6 @@ public class ProjectService {
           project.setUpdatedAt(updatedProject.getUpdatedAt());
           return projectRepository.save(project);
         }).orElseThrow(ResourceNotFoundException::new);
-
-    /*Optional<Project> optionalProject = projectRepository.findById(projectId);
-    if (optionalProject.isPresent()) {
-      optionalProject.get().setTitle(updatedProject.getTitle());
-      optionalProject.get().setDescription(updatedProject.getDescription());
-      optionalProject.get().setUpdatedAt(updatedProject.getUpdatedAt());
-      projectRepository.save(optionalProject.get());
-    } else {
-      throw new ResourceNotFoundException();
-    }*/
   }
 
   public void delete(Long projectId) {
@@ -74,5 +64,9 @@ public class ProjectService {
     } else {
       throw new ResourceNotFoundException();
     }
+  }
+
+  public void deleteAll() {
+    projectRepository.deleteAll();
   }
 }

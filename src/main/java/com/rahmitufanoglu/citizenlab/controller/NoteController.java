@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/user/{userId}/project/{projectId}")
+@RequestMapping("/api/user/{userId}/project/{projectId}")
 public class NoteController {
 
   @Autowired

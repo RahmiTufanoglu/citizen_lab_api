@@ -55,16 +55,6 @@ public class NoteService {
           note.setUpdatedAt(updatedNote.getUpdatedAt());
           return noteRepository.save(note);
         }).orElseThrow(ResourceNotFoundException::new);
-
-    /*Optional<Note> optionalNote = noteRepository.findById(noteId);
-    if (optionalNote.isPresent()) {
-      optionalNote.get().setTitle(updatedNote.getTitle());
-      optionalNote.get().setDescription(updatedNote.getDescription());
-      optionalNote.get().setUpdatedAt(updatedNote.getUpdatedAt());
-      noteRepository.save(optionalNote.get());
-    } else {
-      throw new ResourceNotFoundException();
-    }*/
   }
 
   public void delete(Long noteId) {
@@ -74,5 +64,9 @@ public class NoteService {
     } else {
       throw new ResourceNotFoundException();
     }
+  }
+
+  public void deleteAll() {
+    noteRepository.deleteAll();
   }
 }

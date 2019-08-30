@@ -21,13 +21,20 @@ public class UserService {
 
 
   public List<User> getAll() {
-    //List<User> users = userRepository.findAll();
-    //users.sort(new UserComparator());
     return userRepository.findAll();
   }
 
   public User get(Long userId) {
     Optional<User> optionalUser = userRepository.findById(userId);
+    if (optionalUser.isPresent()) {
+      return optionalUser.get();
+    } else {
+      throw new ResourceNotFoundException();
+    }
+  }
+
+  public User getByName(String firstName) {
+    Optional<User> optionalUser = userRepository.findByFirstName(firstName);
     if (optionalUser.isPresent()) {
       return optionalUser.get();
     } else {
@@ -56,19 +63,6 @@ public class UserService {
           user.setUpdatedAt(newUser.getUpdatedAt());
           return userRepository.save(user);
         }).orElseThrow(ResourceNotFoundException::new);
-
-    /*Optional<User> optionalUser = userRepository.findById(userId);
-    if (optionalUser.isPresent()) {
-      optionalUser.get().setFirstName(newUser.getFirstName());
-      optionalUser.get().setLastName(newUser.getLastName());
-      optionalUser.get().setEmail(newUser.getEmail());
-      optionalUser.get().setPassword(newUser.getPassword());
-      optionalUser.get().setConfirmPassword(newUser.getConfirmPassword());
-      optionalUser.get().setUpdatedAt(newUser.getUpdatedAt());
-      userRepository.save(optionalUser.get());
-    } else {
-      throw new ResourceNotFoundException();
-    }*/
   }
 
   public void delete(Long userId) {
@@ -78,5 +72,9 @@ public class UserService {
     } else {
       throw new ResourceNotFoundException();
     }
+  }
+
+  public void deleteAll() {
+    userRepository.deleteAll();
   }
 }

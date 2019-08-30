@@ -1,9 +1,7 @@
 package com.rahmitufanoglu.citizenlab.controller;
 
 import com.rahmitufanoglu.citizenlab.model.FileModel;
-import com.rahmitufanoglu.citizenlab.model.Note;
 import com.rahmitufanoglu.citizenlab.service.FileService;
-import java.util.Optional;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -18,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 @RestController
-@RequestMapping("/user/{userId}/project/{projectId}/note/{noteId}/file")
+@RequestMapping("/api/user/{userId}/project/{projectId}/note/{noteId}/file")
 public class FileController {
 
   @Autowired
