@@ -8,9 +8,11 @@ import com.rahmitufanoglu.citizenlab.service.FileService;
 import com.rahmitufanoglu.citizenlab.service.NoteService;
 import com.rahmitufanoglu.citizenlab.service.ProjectService;
 import com.rahmitufanoglu.citizenlab.service.UserService;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -84,8 +86,7 @@ public class CitizenlabApplicationTests {
       List<Note> noteList = new ArrayList<>();
       //FileModel fileModel = new FileModel();
 
-      User user1 = new User("Rahmi", "Tufanoglu", "rahmi@gmail.com", "abcdefgh", "abcdefgh", LocalDateTime.now(), LocalDateTime.now(),
-          projectList);
+      User user1 = new User("Rahmi", "Tufanoglu", "rahmi@gmail.com", "abcdefgh", "abcdefgh", LocalDateTime.now(), LocalDateTime.now(), projectList);
       Project project1 = new Project(user1.getUserId(), "PTitel 1", "PDesc 1", LocalDateTime.now(), LocalDateTime.now(), user1, noteList);
       Note note1 = new Note(project1.getProjectId(), "NTitel 1", "NDesc 1", LocalDateTime.now(), LocalDateTime.now(), project1, null);
       //FileModel fileModel1 = new FileModel(1L, "File1", "", null, note1);
@@ -108,19 +109,17 @@ public class CitizenlabApplicationTests {
       List<Note> noteList = new ArrayList<>();
       //FileModel fileModel = new FileModel();
 
-      User user1 = new User("Rahmi", "Tufanoglu", "rahmi@gmail.com", "abcdefgh", "abcdefgh", LocalDateTime.now(), LocalDateTime.now(),
-          projectList);
+      User user1 = new User("Rahmi", "Tufanoglu", "rahmi@gmail.com", "abcdefgh", "abcdefgh", LocalDateTime.now(), LocalDateTime.now(), projectList);
       Project project1 = new Project(user1.getUserId(), "PTitel 1", "PDesc 1", LocalDateTime.now(), LocalDateTime.now(), user1, noteList);
       Note note1 = new Note(project1.getProjectId(), "NTitel 1", "NDesc 1", LocalDateTime.now(), LocalDateTime.now(), project1, null);
       //FileModel fileModel1 = new FileModel(1L, "File1", "", null, note1);
 
-      User updatedUser = new User(project1.getProjectId(), "New Rahmi", "New Tufanoglu", "new.rahmi@gmail.com", "newabcdefgh", "newabcdefgh",
-          LocalDateTime.now(), LocalDateTime.now(), projectList);
+      //User updatedUser = new User(project1.getProjectId(), "New Rahmi", "New Tufanoglu", "new.rahmi@gmail.com", "newabcdefgh", "newabcdefgh", LocalDateTime.now(), LocalDateTime.now(), projectList);
 
       userService.create(user1);
       projectService.create(user1.getUserId(), project1);
       noteService.create(project1.getProjectId(), note1);
-      userService.update(note1.getNoteId(), updatedUser);
+      //userService.update(note1.getNoteId(), updatedUser);
     }
   }
 }

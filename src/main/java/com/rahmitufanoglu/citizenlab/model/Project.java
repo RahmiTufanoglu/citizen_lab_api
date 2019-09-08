@@ -1,8 +1,7 @@
 package com.rahmitufanoglu.citizenlab.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.*;
+
 import java.time.LocalDateTime;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -17,9 +16,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
@@ -28,7 +29,8 @@ import org.springframework.data.annotation.LastModifiedDate;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonIgnoreProperties({"user"})
+//@JsonIgnoreProperties({"user"})
+@ToString
 public class Project {
 
   @Id
@@ -59,12 +61,14 @@ public class Project {
   @JsonFormat(pattern = "dd.MM.yyyy HH:mm:ss")
   private LocalDateTime updatedAt;
 
-  @ManyToOne(fetch = FetchType.LAZY)
+  @ManyToOne
   @JoinColumn(name = "user_id", nullable = false)
+  @JsonBackReference
   private User user;
 
-  @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+  @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
   @JsonProperty("project")
+  @JsonManagedReference
   private List<Note> notes;
 
   // constructor without project_id

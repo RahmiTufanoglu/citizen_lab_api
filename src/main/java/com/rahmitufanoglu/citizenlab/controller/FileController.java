@@ -27,11 +27,6 @@ public class FileController {
     return fileService.get(fileName);
   }
 
-  /*@GetMapping
-  public FileModel getByNote(@PathVariable Long noteId) {
-    return fileService.get(noteId);
-  }*/
-
   @PostMapping
   public void create(@PathVariable Long noteId, @Valid @RequestBody FileModel file, @RequestParam MultipartFile multipartFile) {
     fileService.create(noteId, file, multipartFile);

@@ -1,8 +1,7 @@
 package com.rahmitufanoglu.citizenlab.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.*;
+
 import java.time.LocalDateTime;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -16,9 +15,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
@@ -27,7 +28,8 @@ import org.springframework.data.annotation.LastModifiedDate;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonIgnoreProperties({"project"})
+//@JsonIgnoreProperties({"project"})
+@ToString
 public class Note {
 
   @Id
@@ -61,10 +63,12 @@ public class Note {
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "project_id", nullable = false)
   @JsonProperty("project")
+  @JsonBackReference
   private Project project;
 
-  @OneToOne(mappedBy = "note", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+  @OneToOne(mappedBy = "note", cascade = CascadeType.ALL)
   @JsonProperty("file")
+  @JsonManagedReference
   private FileModel file;
 
   // constructor without note_id

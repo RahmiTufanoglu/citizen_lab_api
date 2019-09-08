@@ -9,9 +9,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rahmitufanoglu.citizenlab.model.Project;
 import com.rahmitufanoglu.citizenlab.model.User;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -45,11 +47,11 @@ public class UserResourceTest {
         .build();
   }
 
-
   @Test
   @WithMockUser
   public void testAddUser() throws Exception {
     List<Project> projectList = new ArrayList<>();
+
     User user1 = new User("Eren", "Jaeger", "eren.jaeger@gmail.com", "abcdefgh", "abcdefgh", LocalDateTime.now(), LocalDateTime.now(), projectList);
 
     String jsonRequest = objectMapper.writeValueAsString(user1);

@@ -3,9 +3,11 @@ package com.rahmitufanoglu.citizenlab.service;
 import com.rahmitufanoglu.citizenlab.exception.ResourceNotFoundException;
 import com.rahmitufanoglu.citizenlab.model.User;
 import com.rahmitufanoglu.citizenlab.repo.UserRepository;
+
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -18,7 +20,6 @@ public class UserService {
 
   @Autowired
   private BCryptPasswordEncoder passwordEncoder;
-
 
   public List<User> getAll() {
     return userRepository.findAll();
@@ -33,16 +34,15 @@ public class UserService {
     }
   }
 
-  public User getByName(String firstName) {
-    Optional<User> optionalUser = userRepository.findByFirstName(firstName);
-    if (optionalUser.isPresent()) {
-      return optionalUser.get();
-    } else {
-      throw new ResourceNotFoundException();
-    }
-  }
-
   public void create(User user) {
+    List<User> users = userRepository.findAll();
+    if (!users.isEmpty()) {
+      for (User value : users) {
+        if (value.getEmail().equals(user.getEmail())) {
+          throw new ResourceNotFoundException("The email address is already taken.");
+        }
+      }
+    }
     String password = user.getPassword();
     String encryptedPassword = passwordEncoder.encode(password);
     user.setPassword(encryptedPassword);
